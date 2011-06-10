@@ -1,6 +1,8 @@
 require "lucy"
 require "i18n_extensions"
 module Babilu
+  mattr_accessor :cookie_name
+  @@cookie_name = 'locale'
 
   JAVASCRIPT = File.read(File.join(File.dirname(__FILE__), 'javascripts', 'babilu.js'))
 
@@ -9,6 +11,7 @@ module Babilu
       g.namespace = "I18n"
       g[:defaultLocale] = default_locale
       g[:translations] = translations
+      g[:cookie_name] = Babilu.cookie_name
       g << methods
     end
   end
